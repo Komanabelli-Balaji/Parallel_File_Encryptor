@@ -8,9 +8,6 @@
 #include <semaphore.h>
 
 class ProcessManagement {
-    sem_t* itemsSemaphore;
-    sem_t* emptySlotsSemaphore;
-
     public:
         ProcessManagement();
         ~ProcessManagement();
@@ -26,11 +23,17 @@ class ProcessManagement {
 
             void printSharedMemory() {
                 std::cout << size << std::endl;
+                std::cout<<front<<std::endl;
+                std::cout<<rear<<std::endl;
             }
         };
 
         SharedMemory* sharedMem;
         int shmFd;
+
+        sem_t* itemsSemaphore;
+        sem_t* emptySlotsSemaphore;
+
         const char* SHM_NAME = "/my_queue";
         std::mutex queueLock;
 };
