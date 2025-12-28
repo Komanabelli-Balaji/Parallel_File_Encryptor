@@ -1,1 +1,11 @@
-My name is Komanabelli Balaji
+Quantum Computing Trends (2025)
+Market Growth: The global quantum computing market reached approximately $3.5 billion in 2025, fueled by aggressive venture capital investment.
+The "Willow" Chip: Google's Willow chip, featuring 105 qubits, achieved a critical benchmark in 2025 by completing a calculation in five minutes that would take a classical supercomputer 10²⁵ years.
+Error Correction Progress: A 2025 breakthrough by QuEra and researchers demonstrated fault-tolerant techniques that reduce quantum error correction overhead by up to 100 times.
+IBM's Roadmap: In 2025, IBM progressed toward multi-chip configurations like the "Kookaburra" processor, aiming for 100,000 qubits by the early 2030s.
+Quantum Security Standard: NIST finalized its first set of post-quantum cryptography standards in late 2024, seeing widespread implementation across governments in 2025 to defend against future quantum attacks.
+Medical Advantage: In March 2025, IonQ and Ansys documented a 12% performance advantage for a medical device simulation on a 36-qubit quantum computer over classical methods.
+Topological Qubits: Microsoft introduced the "Majorana 1" architecture in 2025, which uses novel materials for more stable, low-error qubits.
+Commercial Training: The UN designated 2025 as the International Year of Quantum Science and Technology to address a severe global talent shortage in the field.
+Cloud Accessibility: Quantum-as-a-Service (QaaS) platforms from IBM, Microsoft, and Amazon Braket became the primary method for businesses to test quantum algorithms in 2025.
+Hybrid Systems: The current industry focus in 2025 is on hybrid architectures where quantum processors act as specialized accelerators for specific classical workloads.
