@@ -2,9 +2,9 @@
 #include <unistd.h>
 #include <cstring>
 #include <sys/wait.h>
-#include <atomic>
 #include <sys/fcntl.h>
 #include <sys/mman.h>
+#include <thread>
 
 #include "ProcessManagement.hpp"
 #include "../encryptDecrypt/Cryption.hpp"
@@ -19,6 +19,11 @@ ProcessManagement::ProcessManagement() {
     sharedMem->front = 0;
     sharedMem->rear = 0;
     sharedMem->size.store(0);
+}
+
+ProcessManagement::~ProcessManagement() {
+    munmap(sharedMem, sizeof(SharedMemory));
+    shm_unlink(SHM_NAME);
 }
 
 bool ProcessManagement::submitToQueue(std::unique_ptr<Task> task) {
@@ -40,10 +45,7 @@ bool ProcessManagement::submitToQueue(std::unique_ptr<Task> task) {
     int pid = fork(); // pid === process id
     if(pid < 0) {
         return false;
-    } else if(pid > 0) {
-        std::cout << "Entering the parent process" << std::endl;
-        // waitpid();
-    } else {
+    } else if(pid == 0) {
         std::cout << "Entering the child process" << std::endl;
         executeTasks();
         std::cout << "Exiting the child process" << std::endl;
@@ -67,40 +69,3 @@ void ProcessManagement::executeTasks() {
     std::cout << "Executing child process: " << taskStr << std::endl;
     executeCryption(taskStr);
 }
-
-ProcessManagement::~ProcessManagement() {
-    munmap(sharedMem, sizeof(SharedMemory));
-    shm_unlink(SHM_NAME);
-}
-
-
-
-
-
-
-
-
-
-
-// int childProcessToRun = fork();
-        // if (childProcessToRun == 0) {
-        //     // Child process
-        //     std::string taskStr = taskToExecute->toString();
-        //     char* args[3];
-        //     args[0] = strdup("./cryption");  // Use the correct path to your cryption executable
-        //     args[1] = strdup(taskStr.c_str());
-        //     args[2] = nullptr;
-        //     execv("./cryption", args);  // Use the correct path to your cryption executable
-        //     // If execv returns, there was an error
-        //     std::cerr << "Error executing cryption" << std::endl;
-        //     exit(1);
-        // } else if (childProcessToRun > 0) {
-        //     // Parent process
-        //     // Wait for the child process to complete
-        //     int status;
-        //     waitpid(childProcessToRun, &status, 0);
-        // } else {
-        //     // Fork failed
-        //     std::cerr << "Fork failed" << std::endl;
-        //     exit(1);
-        // }

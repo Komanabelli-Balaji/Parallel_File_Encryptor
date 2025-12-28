@@ -26,6 +26,8 @@ class ProcessManagement {
 
             void printSharedMemory() {
                 std::cout << size << std::endl;
+                std::cout<<front<<std::endl;
+                std::cout<<rear<<std::endl;
             }
         };
 
