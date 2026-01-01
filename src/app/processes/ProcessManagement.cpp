@@ -50,6 +50,8 @@ bool ProcessManagement::submitToQueue(std::unique_ptr<Task> task) {
         executeTasks();
         std::cout << "Exiting the child process" << std::endl;
         exit(0);
+    } else {
+        childPIDs.push_back(pid);
     }
     return true;
 }
@@ -68,4 +70,12 @@ void ProcessManagement::executeTasks() {
 
     std::cout << "Executing child process: " << taskStr << std::endl;
     executeCryption(taskStr);
+}
+
+void ProcessManagement::waitForChildren() {
+    for (pid_t pid : childPIDs) {
+        int status = 0;
+        waitpid(pid, &status, 0);
+    }
+    childPIDs.clear();
 }
